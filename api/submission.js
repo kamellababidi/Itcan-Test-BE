@@ -124,7 +124,7 @@ router.post(
         await Submission.findOne({ where: {id: req.params.uid} })
         .then((submission) => {
             if(submission) {
-                return res.status(201).json({});
+                return res.status(201).json(submission);
             } else {
                 return res.status(404).json({});
             }
