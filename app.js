@@ -31,7 +31,6 @@ const app = express();
 app.use(express.json({ extended: false }));
 app.get('/', (req, res) => res.send(' API 🧐 is running  🤩🎉'));
 app.use('/api/submission', require('./api/submission'));
-
 /**
  * Express configuration.
  */

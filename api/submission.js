@@ -59,6 +59,8 @@ router.post(
             .isEmpty(),
     ],
     async (req, res) => {
+      res.header("Access-Control-Allow-Origin", "*");
+      res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() });
@@ -106,6 +108,8 @@ router.post(
       '/',
       [],
       async (req, res) => {
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
         await Submission.findAll()
         .then((submissions) => {
           return res.status(200).json(submissions);
@@ -121,6 +125,8 @@ router.post(
     [],
     async (req, res) => {
         // permit params
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
         await Submission.findOne({ where: {id: req.params.uid} })
         .then((submission) => {
             if(submission) {
@@ -142,6 +148,8 @@ router.post(
       '/:uid',
       [],
       async (req, res) => {
+          res.header("Access-Control-Allow-Origin", "*");
+          res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
           // permit params
           await Submission.destroy({ where: {id: req.params.uid} })
           .then((submission) => {
