@@ -11,6 +11,7 @@ const errorHandler = require('errorhandler');
 const dotenv = require('dotenv');
 const path = require('path');
 const multer = require('multer');
+var cors = require('cors')
 const sequelize = require('./config/db');
 /**
  * Load environment variables from .env file, where API keys and passwords are configured.
@@ -27,7 +28,7 @@ i18n.configure({
  * Create Express server.
  */
 const app = express();
-
+app.use(cors())
 app.use(express.json({ extended: false }));
 app.get('/', (req, res) => res.send(' API 🧐 is running  🤩🎉'));
 app.use('/api/submission', require('./api/submission'));
@@ -39,7 +40,9 @@ app.set('port', process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080);
 app.set('views', path.join(__dirname, 'views'));
 app.use(compression());
 app.use(logger('dev'));
-app.use(bodyParser.json());
+app.use(bodyParser.json({
+  type: "*/*"
+}));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.disable('x-powered-by');
